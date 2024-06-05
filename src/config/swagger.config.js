@@ -4,13 +4,14 @@ const swaggerUi = require('swagger-ui-express');
 const SwaggerConfig = (app) => {
     const swaggerDocument = swaggerJsDoc({
         swaggerDefinition: {
+            openapi: '3.0.1',
             info: {
                 title: 'divar-backend',
                 description: 'divar nodejs api',
                 version: '1.0.0'
             }
         },
-        apis: []
+        apis: [process.cwd() + '/src/modules/**/*.swagger.js']
     });
     const swagger = swaggerUi.setup(swaggerDocument, {});
 
