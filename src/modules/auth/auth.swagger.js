@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *  name: Auth
- * description: auth Module And Routes
+ *  description: auth Module And Routes
 */
 
 /**
@@ -12,7 +12,7 @@
  *          SendOTP:
  *              type: object
  *              required:
- *                  - mobile
+ *                  -   mobile
  *              properties:
  *                  mobile:
  *                      type: string

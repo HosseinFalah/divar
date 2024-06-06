@@ -1,11 +1,13 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
+const morgan = require('morgan');
 
 const { ConnectToDB } = require('./src/config/mongoose.config');
 const { SwaggerConfig } = require('./src/config/swagger.config');
 const mainRouter = require('./src/routes/app.routes');
 const NotFoundHandler = require('./src/common/exception/not-found.handler');
+const AllExceptionHandler = require('./src/common/exception/all-exception.handler');
 
 dotenv.config();
 dotenv.config({
@@ -17,15 +19,17 @@ async function main() {
 
     ConnectToDB();
 
-    SwaggerConfig(app);
-    app.use(mainRouter);
-    
+    app.use(morgan('dev'));
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     
+    SwaggerConfig(app);
+    
+    app.use(mainRouter);
+    
     // handle route notfound error
     NotFoundHandler(app);
-    
+    AllExceptionHandler(app);
     app.listen(process.env.PORT || 3000, () => {
         console.log(`server is running in port ${process.env.PORT} base-url: http://localhost:${process.env.PORT}`);
     })

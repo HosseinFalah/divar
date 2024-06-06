@@ -13,7 +13,7 @@ class AuthService {
     };
 
     async sendOTP(mobile) {
-        const user = this.#model.findOne({ mobile });
+        const user = await this.#model.findOne({ mobile });
         const now = new Date().getTime();
         const otp = {
             code: crypto.randomInt(10000, 99999),

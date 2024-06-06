@@ -14,7 +14,9 @@ class AuthController {
         try {
             const { mobile } = req.body;
             await this.#service.sendOTP(mobile);
-            return { message: AuthMessage.SendOtpSuccessFully }
+            return res.json({
+                message: AuthMessage.SendOtpSuccessFully
+            });
         } catch (error) {
             next(error)
         }
