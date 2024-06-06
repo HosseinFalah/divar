@@ -22,11 +22,15 @@ class AuthController {
         }
     }
 
-    async checkOTP() {
+    async checkOTP(req, res, next) {
         try {
-            
+            const { mobile, code } = req.body;
+            await this.#service.checkOTP(mobile, code);
+            return res.json({
+                message: AuthMessage.LogingSuccessFully
+            })
         } catch (error) {
-            
+            next(error);
         }
     }
 }
