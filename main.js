@@ -8,6 +8,7 @@ const { SwaggerConfig } = require('./src/config/swagger.config');
 const mainRouter = require('./src/routes/app.routes');
 const NotFoundHandler = require('./src/common/exception/not-found.handler');
 const AllExceptionHandler = require('./src/common/exception/all-exception.handler');
+const cookieParser = require('cookie-parser');
 
 dotenv.config();
 dotenv.config({
@@ -22,10 +23,11 @@ async function main() {
     app.use(morgan('dev'));
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    
-    SwaggerConfig(app);
+    app.use(cookieParser(process.env.COOKIE_SECRET_KEY));
     
     app.use(mainRouter);
+
+    SwaggerConfig(app);
     
     // handle route notfound error
     NotFoundHandler(app);
