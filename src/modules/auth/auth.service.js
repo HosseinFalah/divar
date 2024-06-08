@@ -43,7 +43,6 @@ class AuthService {
             user.verifiedMobile = true;
         }
         const accessToken = this.signToken({ mobile, id: user._id });
-        console.log(accessToken);
         user.accessToken = accessToken;
         await user.save();
         return accessToken;
