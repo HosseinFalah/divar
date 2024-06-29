@@ -108,6 +108,22 @@
 
 /**
  * @swagger
+ * /option/{id}:
+ *  delete:
+ *      summary: delete option by id
+ *      tags:   
+ *          -   Option
+ *      parameters:
+ *          -   in: path
+ *              name: id
+ *              type: string
+ *      responses:
+ *          200:
+ *              description: deleted successFully
+ */
+
+/**
+ * @swagger
  * /option/:
  *  get:
  *      summary: get all option
