@@ -9,7 +9,7 @@ class CategoryController {
     constructor() {
         autoBind(this);
         this.#service = categoryService;
-    }
+    };
 
     async create(req, res) {
         try {
@@ -19,7 +19,7 @@ class CategoryController {
         } catch (error) {
             next(error)
         }
-    }
+    };
 
     async find(req, res, next) {
         try {
@@ -27,6 +27,16 @@ class CategoryController {
             return res.json(categories);
         } catch (error) {
             next(error)
+        }
+    };
+
+    async remove(req, res, next) {
+        try {
+            const { id } = req.params;
+            await this.#service.remove(id);
+            return res.status(httpCodes.OK).json({ message: CategoryMessage.Deleted });
+        } catch (error) {
+            next(error);
         }
     }
 }
